@@ -10,7 +10,7 @@ module.exports = function transform(arr) {
       case '--discard-next':
         output.push(undefined);
         output.push(undefined);
-        i += 2;
+        i += 1;
         break;
       case '--discard-prev':
         if (i >= 1) {
@@ -26,7 +26,7 @@ module.exports = function transform(arr) {
         break;
       case  '--double-prev':
         if (i >= 1) {
-          output.push(arr[i - 1]);
+          output.push(output[output.length - 1]);
         };
         break;
       default: output[i] = arr[i];
