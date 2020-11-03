@@ -1,25 +1,36 @@
 const CustomError = require("../extensions/custom-error");
 
 module.exports = function transform(arr) {
-  if (typeof (arr) !== 'Array') {
+  if (!Array.isArray(arr)) {
     throw new Error;
   };
-  let output = {};
-  let findInsrtuction = function () {
-  };
+  let output = [];
   for (let i = 0; i <= arr.length; i++) {
     switch (arr[i]) {
       case '--discard-next':
-        if (typeof (output[i + 2]) === 'string') {
-          
-        };
-        arr.slice().concat(elem.shift());
+        output.push(undefined);
+        output.push(undefined);
+        i += 2;
+        break;
       case '--discard-prev':
-        return arr.slice().pop().concat(elem);
+        if (i >= 1) {
+          output.pop();
+          output.push(undefined);
+          output.push(undefined);
+        };
+        break;
       case '--double-next':
-        return arr.slice().concat(elem.push(elem[elem.length]));
+        if (i < arr.length - 1) {
+          output.push(arr[i + 1]);
+        };
+        break;
       case  '--double-prev':
-        return arr.slice().push(arr[arr.length]).concat(elem);
+        if (i >= 1) {
+          output.push(arr[i - 1]);
+        };
+        break;
+      default: output[i] = arr[i];
     };
   };
+  return output.filter((item) => item !== undefined);
 };
