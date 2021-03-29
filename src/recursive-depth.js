@@ -2,7 +2,6 @@ const CustomError = require("../extensions/custom-error");
 
 module.exports = class DepthCalculator {
   calculateDepth(arr) {
-    //throw new CustomError('Not implemented');
     let switcher = new Boolean;
     let flatten = [];
     let deep = 0;
@@ -13,8 +12,9 @@ module.exports = class DepthCalculator {
         return acc.concat(val);
       }, [] );
       deep++;
+      if (switcher) return undeeper (flatten);
+      else return deep;
     };
-    if (switcher) return undeeper (flatten);
-    else return deep;
+    return undeeper (arr);
   };
 };
